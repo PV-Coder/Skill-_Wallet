@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Insurance Fraud Detection</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#1d2671,#c33764);
+margin:0;
+padding:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:15px;
+width:420px;
+box-shadow:0px 10px 25px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+h1{
+margin-bottom:20px;
+color:#333;
+}
+
+.input-group{
+margin:10px 0;
+text-align:left;
+}
+
+label{
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+background:linear-gradient(45deg,#007BFF,#00c6ff);
+border:none;
+border-radius:8px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.result{
+margin-top:25px;
+padding:15px;
+border-radius:10px;
+font-size:22px;
+font-weight:bold;
+color:white;
+animation:fade 0.6s ease-in;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1;}
+}
+
+.green{
+background:#16a34a;
+}
+
+.red{
+background:#dc2626;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1><i class="fa-solid fa-shield-halved"></i> Insurance Fraud Detection</h1>
+
+<form action="/predict" method="post">
+
+<div class="input-group">
+<label>Age</label>
+<input type="number" name="age" value="{{age}}" required>
+</div>
+
+<div class="input-group">
+<label>Policy Deductible</label>
+<input type="number" name="deductable" value="{{deductable}}" required>
+</div>
+
+<div class="input-group">
+<label>Annual Premium</label>
+<input type="number" name="premium" value="{{premium}}" required>
+</div>
+
+<div class="input-group">
+<label>Umbrella Limit</label>
+<input type="number" name="umbrella" value="{{umbrella}}" required>
+</div>
+
+<div class="input-group">
+<label>Incident Severity</label>
+<select name="severity">
+<option value="0">Trivial Damage</option>
+<option value="1">Minor Damage</option>
+<option value="2">Major Damage</option>
+<option value="3">Total Loss</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Total Claim Amount</label>
+<input type="number" name="claim" value="{{claim}}" required>
+</div>
+
+<button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Predict</button>
+
+</form>
+
+{% if prediction_text %}
+
+<div class="result {% if color=='green' %}green{% else %}red{% endif %}">
+{{prediction_text}}
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
